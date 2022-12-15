@@ -1,7 +1,9 @@
 # Vue3-Framed-Camera-Cropper
 
 An example of a camera running in Vue 3 with a framed portion to be cropped
-for the final result. This example demonstrates a few different concepts:
+for the final result. [Online Demo](https://beta.heroharmony.com/experiments/vue-camera/)
+
+## Coding Concepts Covered
 
 - /src/components/SimpleCamera.vue, uses basic Script hook
 - /src/components/Cropper.vue, uses Script Setup
@@ -9,7 +11,14 @@ for the final result. This example demonstrates a few different concepts:
   - utilizing window, pickup a textMessage inside Vue
   - call JS functions outside, like sending the Photo to parent
 
-## Project Configuration
+## Known Shortcomings
+
+- The camera resolution is given a fixed width and height
+- No capability to retrieve device's max resolution?
+- Framed area for cropping is a string percentage for now
+- A number of props are given defaults, but not nessarily utilized in this example
+
+## Project Notes
 
 - Vue 3 / Vite
 - TypeScript
@@ -17,8 +26,8 @@ for the final result. This example demonstrates a few different concepts:
 
 ## Packages Used
 
-[simple-vue-camera](https://github.com/BastiaanJansen/simple-vue-camera)
-[vue-cropper](https://github.com/ballcat-projects/vue-cropper)
+- [simple-vue-camera](https://github.com/BastiaanJansen/simple-vue-camera)
+- [vue-cropper](https://github.com/ballcat-projects/vue-cropper)
 
 ## Recommended IDE Setup
 
