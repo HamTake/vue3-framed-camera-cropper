@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Vue Camera</title>
+    <script>
+      window.testMessage = 'Hello from index.html';
+
+      window.myAlert = function(message) {
+        console.log("myAlert: " + message);
+      }
+
+      window.onSavePhoto = function(data) {
+        console.log("Vue app has sent photo, openning new tab with it")
+        window.open(data)
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <!-- // example of receiving content from App.vue -->
+    <!-- <div id="myFrame"></div> -->
+  </body>
+</html>
