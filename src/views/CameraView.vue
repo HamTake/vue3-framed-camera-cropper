@@ -33,6 +33,7 @@
   // blobs
   const photoFromCamera = ref()
   const photoCropped = ref()
+  const rawBlob = ref()
 
   const nextScreen = (screenNumber?: number) => {
     if (screenNumber) {
@@ -57,9 +58,13 @@
   }
 
   const displayCropped = (blob: any) => {
-    const url = URL.createObjectURL(blob)
+    rawBlob.value = blob
+    const url = URL.createObjectURL(rawBlob.value)
+
+    // prepare for next screen
     photoCropped.value = url
     showCropper.value = false
+
     // on next tick switch screen
     setTimeout(() => {
       nextScreen(2)
@@ -68,7 +73,7 @@
 
   const requestPhoto = () => {
     try {
-      ;(window as any).onSavePhoto(photoCropped.value)
+      ;(window as any).onSavePhoto(rawBlob.value)
     } catch (error) {
       console.log(`error`, error)
     }

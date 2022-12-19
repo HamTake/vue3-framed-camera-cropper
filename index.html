@@ -12,9 +12,11 @@
         console.log("myAlert: " + message);
       }
 
-      window.onSavePhoto = function(data) {
+      window.onSavePhoto = function(blob) {
         console.log("Vue app has sent photo, openning new tab with it")
-        window.open(data)
+
+        const url = URL.createObjectURL(blob)
+        window.open(url)
       }
     </script>
   </head>

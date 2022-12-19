@@ -50,3 +50,59 @@ npm run dev
 ```sh
 npm run build
 ```
+
+# Examples
+
+## POST to MVC
+
+Front end
+
+```
+window.onSavePhoto = function (blob) {
+  var reader = new FileReader();
+  reader.readAsDataURL(blob);
+  reader.onloadend = function () {
+    var base64data = reader.result;
+
+    var formdata = new FormData();
+    formdata.append("base64image", base64data);
+
+    $.ajax({
+      type: "POST",
+      url: '/MyController/UploadBlobPhoto',
+      data: formdata,
+      processData: false,
+      contentType: false,
+      success: function (result) {
+          alert("sent image");
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log("camera.html error: ", errorThrown);
+      }
+    });
+  }
+}
+```
+
+Backend
+
+```
+[HttpPost]
+public void UploadBlobPhoto(string base64image)
+{
+    var t = base64image.Substring(22);  // remove data:image/png;base64,
+    byte[] bytes = Convert.FromBase64String(t);
+    System.Drawing.Image image;
+    using (MemoryStream ms = new MemoryStream(bytes))
+    {
+        image = System.Drawing.Image.FromStream(ms);
+    }
+    var randomFileName = Guid.NewGuid().ToString().Substring(0, 4) + ".png";
+
+    string uploadImageFilePhysicalPath = "rootPath" + "\\" + "uploadImageFilePath";
+
+    var stream = new FileStream(uploadImageFilePhysicalPath, FileMode.Create);
+    System.Drawing.Image resizeImage = ResizeImage(image, new Size(600, 800));
+    resizeImage.Save(stream, ImageFormat.Jpeg);
+}
+```
